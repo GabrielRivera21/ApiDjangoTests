@@ -1,0 +1,38 @@
+buildscript {
+	ext {
+		ApiTest = '0.0.5'
+	}
+    repositories {
+    	jcenter()
+        mavenLocal()
+    }
+    dependencies {
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    
+    compile("com.google.guava:guava:17.0")
+    compile("org.apache.httpcomponents:httpclient:4.3.4")
+    compile("com.squareup.retrofit:retrofit:1.9.0")
+    compile("com.squareup.okhttp:okhttp:2.2.0")
+    compile("commons-io:commons-io:2.4")
+        
+    compile("junit:junit:4.10")
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.11'
+}
