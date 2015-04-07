@@ -16,7 +16,7 @@ import retrofit.converter.GsonConverter;
 import retrofit.mime.TypedFile;
 
 import com.deeplogics.api.SecuredRestDjangoBuilder;
-import com.deeplogics.api.UsersDjangoApi;
+import com.deeplogics.api.DjangoApi;
 import com.deeplogics.models.PageClient;
 import com.deeplogics.models.Users;
 import com.google.gson.Gson;
@@ -31,21 +31,21 @@ public class UsersDjangoClientApiTest {
 	Gson gson = new GsonBuilder()
 		.setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").create();
 	
-	private UsersDjangoApi usersNoTokenService = new RestAdapter.Builder()
+	private DjangoApi usersNoTokenService = new RestAdapter.Builder()
 		.setConverter(new GsonConverter(gson))
-		.setEndpoint(UsersDjangoApi.HOST_URL)
+		.setEndpoint(DjangoApi.HOST_URL)
 		.setClient(new ApacheClient(UnsafeHttpsClient.createUnsafeClient()))
 		.setLogLevel(LogLevel.FULL).build()
-		.create(UsersDjangoApi.class);
+		.create(DjangoApi.class);
 	
-	private UsersDjangoApi usersService = new SecuredRestDjangoBuilder()
-		.setEndpoint(UsersDjangoApi.HOST_URL)
+	private DjangoApi usersService = new SecuredRestDjangoBuilder()
+		.setEndpoint(DjangoApi.HOST_URL)
 		.setUsername(USERNAME)
 		.setPassword(PASSWORD)
 		.setConverter(new GsonConverter(gson))
-		.setLoginEndpoint(UsersDjangoApi.HOST_URL + UsersDjangoApi.OAUTH_PATH)
+		.setLoginEndpoint(DjangoApi.HOST_URL + DjangoApi.OAUTH_PATH)
 		.setLogLevel(LogLevel.FULL)
-		.build().create(UsersDjangoApi.class);
+		.build().create(DjangoApi.class);
 
 	Users user = TestDjangoData.randomUser();
 

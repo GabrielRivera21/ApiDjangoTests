@@ -3,6 +3,7 @@ package com.deeplogics.api;
 
 import com.deeplogics.models.EditPassword;
 import com.deeplogics.models.PageClient;
+import com.deeplogics.models.Projects;
 import com.deeplogics.models.Users;
 
 import retrofit.client.Response;
@@ -27,7 +28,7 @@ import retrofit.mime.TypedFile;
  * @author Gabriel
  *
  */
-public interface UsersDjangoApi {
+public interface DjangoApi {
 	
 	public static final String HOST_URL = "http://localhost:8000";
 									
@@ -42,6 +43,10 @@ public interface UsersDjangoApi {
 	public static final String USERS_EDIT_PATH = USERS_PATH + "/edit/me";
 	
 	public static final String USERS_EDIT_PASS_PATH = USERS_EDIT_PATH + "/pass";
+	
+	public static final String PROJECTS_PATH = "/projects";
+	
+	public static final String PROJECTS_ID_PATH = "/projects/{id}";
 	
 	@POST(USERS_REGISTER)
 	public Users addUser(@Body Users user);
@@ -83,5 +88,14 @@ public interface UsersDjangoApi {
 
 	@PUT(USERS_EDIT_PASS_PATH)
 	public Response editPassword(@Body EditPassword newPass);
+	
+	@GET(PROJECTS_PATH)
+	public PageClient<Projects> getAllProjects();
+	
+	@POST(PROJECTS_PATH)
+	public Projects addProject(@Body Projects project);
+	
+	@GET(PROJECTS_ID_PATH)
+	public Projects getProject(@Path("id") Long projId);
 	
 }
